@@ -28,7 +28,7 @@ function HomeScreen() {
         setApiData(filteredAlbums);
     };
 
-    const toggleFavourite = (album) => {
+    const toggleFavourite = (album) => {   
         const updatedFavourites = favourites.includes(album.idAlbum)
             ? favourites.filter(favId => favId !== album.idAlbum)
             : [...favourites, album.idAlbum];
@@ -37,7 +37,7 @@ function HomeScreen() {
     };
 
     return (
-        <div className=''>
+        <div className='bg-orange-100'>
             <input
                 type="text"
                 placeholder="Search for an album"
@@ -46,18 +46,24 @@ function HomeScreen() {
             />
             <button onClick={searchAlbums}>Search</button>
             
-                {apiData.map(album => (
-                    <div className='m-20' key={album.idAlbum}>
-                        <div className=''>
-                            
-                        </div>
-                        <p className='2-10'>{album.strAlbum}</p>
+                <div className='flex justify-center flex-wrap py-10'>
+
                 
+                {apiData.map(album => (
+                    <div className=' bg-lime-900 rounded-xl p-4 w-[20%] mx-4 my-4 ' key={album.idAlbum}>
+                        <div className=''>
+                            <img className='rounded' src={album.strAlbumThumb} alt="" />
+                        </div>
+                        <p className='text-orange-200 font-bold text-3xl ml-2 mt-5 '>{album.strAlbum}</p>
+                        <p className='text-white mb-5 ml-2'>({album.intYearReleased})</p>
+                        <div className='flex justify-end'>
+                            <button onClick={() => toggleFavourite(album)} className=' bg-white px-2 py-1  rounded-xl'>{favourites.includes(album.idAlbum) ? 'Unfavourite' : 'Add to Favourites'}</button>
+                        </div>
                     <div>
-                        <button onClick={() => toggleFavourite(album)} className='bg-orange-200 px-1 rounded-xl'>{favourites.includes(album.idAlbum) ? 'Unfavourite' : 'Add to Favourites'}</button>
                     </div>
                     </div>
                 ))}
+                </div>
         </div>
     );
 }
