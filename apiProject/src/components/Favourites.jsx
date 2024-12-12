@@ -1,45 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
- 
+
 function Favourites() {
     const [favourites, setFavourites] = useState(() => {
         const savedFavourites = localStorage.getItem('favourites');
         return savedFavourites ? JSON.parse(savedFavourites) : [];
     });
-    const [movies, setMovies] = useState([]);
- 
+    const [albums, setAlbums] = useState([]);
+
     useEffect(() => {
-        fetch('https://ghibliapi.vercel.app/films')
-            .then(response => response.json())
-            .then(data => setMovies(data))
-            .catch(error => console.error('Error fetching movies:', error));
-    }, []);
- 
-    const favouriteMovies = movies.filter(movie => favourites.includes(movie.id));
- 
-    const removeFavourite = (movieId) => {
-        const updatedFavourites = favourites.filter(favId => favId !== movieId);
+        async function fetchAlbums() {
+            const albumData = await Promise.all(
+                favourites.map(id =>
+                    fetch(`https://www.theaudiodb.com/api/v1/json/2/album.php?m=${id}`)
+                        .then(response => response.json())
+                        .then(data => data.album ? data.album[0] : null)
+                )
+            );
+            setAlbums(albumData.filter(album => album !== null));
+        }
+        if (favourites.length) fetchAlbums();
+    }, [favourites]);
+
+    const removeFavourite = (albumId) => {
+        const updatedFavourites = favourites.filter(favId => favId !== albumId);
         setFavourites(updatedFavourites);
         localStorage.setItem('favourites', JSON.stringify(updatedFavourites));
     };
- 
-    if (favouriteMovies.length === 0) {
+
+    if (albums.length === 0) {
         return (
             <div>
-                <h1>No Favourite Movies Yet</h1>
+                <h1>No Favourite Albums Yet</h1>
                 <Link to="/">Back to Home</Link>
             </div>
         );
     }
- 
+
     return (
         <div>
-            <h1>Favourite Movies</h1>
+            <h1>Favourite Albums</h1>
             <ul>
-                {favouriteMovies.map(movie => (
-                    <li key={movie.id}>
-                        <Link to={`/detail/${movie.id}`}>{movie.title}</Link>
-                        <button onClick={() => removeFavourite(movie.id)}>Remove Favourite</button>
+                {albums.map(album => (
+                    <li key={album.idAlbum}>
+                        <Link to={`/album/${album.idAlbum}`}>{album.strAlbum}</Link>
+                        <button onClick={() => removeFavourite(album.idAlbum)}>Remove Favourite</button>
                     </li>
                 ))}
             </ul>
@@ -47,5 +52,5 @@ function Favourites() {
         </div>
     );
 }
- 
+
 export default Favourites;

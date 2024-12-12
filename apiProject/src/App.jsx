@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomeScreen />} />
-          <Route path="/movie/:id" element={<DetailScreen />} />
+          <Route path="/album/:id" element={<DetailScreen />} />
           <Route path="/favourites" element={<Favourites />} />
         </Route>
       </Routes>
