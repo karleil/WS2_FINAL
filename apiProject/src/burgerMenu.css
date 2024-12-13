@@ -1,5 +1,5 @@
 .bm-menu {
-  background: #f59e0b;
+  background: #385414;
   padding: 1.5rem;
   font-size: 1.25rem;
   display: flex;
@@ -8,7 +8,7 @@
 }
 
 .bm-item-list a {
-  color: #4d2500;
+  color: #ffd99f;
   text-decoration: none;
   padding: 0.5rem 0;
   transition: color 0.3s ease;
@@ -26,7 +26,7 @@
 }
 
 .bm-burger-bars {
-  background: #871b00;
+  background: #ffd99f;
 }
 
 nav {

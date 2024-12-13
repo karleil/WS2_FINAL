@@ -18,7 +18,7 @@ const Layout = () => {
         <div >
             <div className="bg-lime-900">
                 <header className="flex justify-between items-center mx-auto py-4 w-[80%]">
-                    <Link to="/"><img src="/logo.svg" alt="logo" className="w-[50%] md:w-[15%]"/></Link>
+                    <Link to="/"><img src="/logo.svg" alt="logo" className="w-[10%] md:w-[15%]"/></Link>
                     <nav className="hidden md:flex flex-1 justify-end">
                         <ul className="flex items-center text-sm md:text-lg font-semibold text-orange-200">
                             <li><a className="px-4 hover:underline" href="/">Home</a></li>
