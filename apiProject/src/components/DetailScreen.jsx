@@ -19,7 +19,7 @@ function DetailScreen() {
     }
 
     return (
-        //same as the HomePage, just renders the data from the API
+        //same as the HomePage, renders the data from the API.
         <div className='bg-orange-100 py-10 pb-20'>
                 <h1 className='text-3xl md:text-5xl font-bold py-5 text-center md:text-left md:pl-32 pb-10 text-lime-950'>{album.strAlbum}</h1>
             <div className='bg-lime-900 w-[90%] md:w-[70%] px-4 py-4 m-auto rounded-xl md:flex md:gap-5'>
